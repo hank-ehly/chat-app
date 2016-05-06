@@ -30,20 +30,17 @@ div#message-container {
 }
 
 div.chat-bubble {
+  background: #fff;
   border-radius: 20px;
   display: inline-block;
   padding: 8px 12px;
-}
-
-li.non-owner-message div.chat-bubble {
-  background: #fff;
 }
 
 li.owner-message {
   text-align: right;
 
   div.chat-bubble {
-    background: #00b3ee;
+    background-image: linear-gradient(to right bottom, #00b3ee, lighten(#00b3ee, 2));
     color: #fff;
   }
 }
