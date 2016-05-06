@@ -6,13 +6,12 @@
  */
 
 import {Component} from 'angular2/core';
+import {ChatComponent} from '../+chat/index';
 
 @Component({
   selector: 'ch-app',
   templateUrl: 'app/components/app.component.html',
-  styleUrls: ['app/components/app.component.css']
+  directives: [ChatComponent]
 })
 
-export class AppComponent {
-
-}
+export class AppComponent {}

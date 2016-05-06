@@ -5,3 +5,4 @@
  * Created by henryehly on 5/5/16.
  */
 
+export * from './components/chat.component';
