@@ -9,8 +9,13 @@ export class ProjectConfig extends SeedConfig {
     super();
     // this.APP_TITLE = 'Put name of your app here';
     let additional_deps: InjectableDependency[] = [
-      // {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
+      {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
       // {src: 'lodash/lodash.min.js', inject: 'libs'},
+      {src: 'socket.io/lib/index.js', inject: 'libs'},
+      {src: 'socket.io-client/lib/index.js', inject: 'libs'},
+      {src: 'tether/dist/js/tether.min.js', inject: 'libs'},
+      {src: 'bootstrap/dist/js/bootstrap.min.js', inject: 'libs'},
+      {src: 'bootstrap/dist/css/bootstrap.min.css', inject: true}
     ];
 
     this.APP_ASSETS = [
