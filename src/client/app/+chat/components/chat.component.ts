@@ -9,7 +9,8 @@ import {Component} from 'angular2/core';
 
 @Component({
   selector: 'ch-comp',
-  templateUrl: 'app/+chat/components/chat.component.html'
+  templateUrl: 'app/+chat/components/chat.component.html',
+  styleUrls: ['app/+chat/components/chat.component.css']
 })
 
 export class ChatComponent {}
