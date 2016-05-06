@@ -9,7 +9,7 @@ export const ENVIRONMENTS: Environments = {
 
 
 export class SeedConfig {
-  PORT                 = argv['port']                        || 5555;
+  PORT                 = argv['port']                        || 5556;
   PROJECT_ROOT         = join(__dirname, '../..');
   ENV                  = getEnvironment();
   DEBUG                = argv['debug']                       || false;

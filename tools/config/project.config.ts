@@ -13,6 +13,14 @@ export class ProjectConfig extends SeedConfig {
       // {src: 'lodash/lodash.min.js', inject: 'libs'},
     ];
 
+    this.APP_ASSETS = [
+      //...
+      // { src: `${this.ASSETS_SRC}/main.css`, inject: true }, // the old css file
+      { src: `${this.ASSETS_SRC}/main.scss`, inject: true }, // renamed SASS file
+    ];
+
+    this.CSS_PROD_BUNDLE = 'main.css';
+
     const seedDependencies = this.NPM_DEPENDENCIES;
 
     this.NPM_DEPENDENCIES = seedDependencies.concat(additional_deps);
