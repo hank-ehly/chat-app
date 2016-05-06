@@ -1,51 +1,16 @@
 <div id="chat-box">
   <div id="message-container">
     <ul>
-      <li>I'm 01</li>
-      <li>I'm 02</li>
-      <li>I'm 03</li>
-      <li>I'm 04</li>
-      <li>I'm 05</li>
-      <li>I'm 06</li>
-      <li>I'm 07</li>
-      <li>I'm 08</li>
-      <li>I'm 09</li>
-      <li>I'm 10</li>
-      <li>I'm 11</li>
-      <li>I'm 12</li>
-      <li>I'm 13</li>
-      <li>I'm 14</li>
-      <li>I'm 15</li>
-      <li>I'm 16</li>
-      <li>I'm 17</li>
-      <li>I'm 18</li>
-      <li>I'm 19</li>
-      <li>I'm 20</li>
-      <li>I'm 21</li>
-      <li>I'm 22</li>
-      <li>I'm 23</li>
-      <li>I'm 24</li>
-      <li>I'm 25</li>
-      <li>I'm 26</li>
-      <li>I'm 27</li>
-      <li>I'm 28</li>
-      <li>I'm 29</li>
-      <li>I'm 30</li>
-      <li>I'm 31</li>
-      <li>I'm 32</li>
-      <li>I'm 33</li>
-      <li>I'm 34</li>
-      <li>I'm 35</li>
-      <li>I'm 36</li>
-      <li>I'm 37</li>
-      <li>I'm 38</li>
-      <li>I'm 39</li>
-      <li>I'm 40</li>
+      <li *ngFor="let message of mockMessages" [ngClass]="getMessageStyle(message)">
+        <div class="chat-bubble">
+          {{message.text}}
+        </div>
+      </li>
     </ul>
   </div>
 </div>
 
 <div id="chat-input">
-  <textarea placeholder="Type here.."></textarea>
-  <button>Send</button>
+  <textarea placeholder="Type here.." class="form-control"></textarea>
+  <button class="btn btn-primary-outline">Send</button>
 </div>

@@ -6,3 +6,4 @@
  */
 
 export * from './components/chat.component';
+export * from './interfaces/chat-message.interface';
