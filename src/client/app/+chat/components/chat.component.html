@@ -11,6 +11,6 @@
 </div>
 
 <div id="chat-input">
-  <textarea placeholder="Type here.." class="form-control"></textarea>
-  <button class="btn btn-primary-outline">Send</button>
+  <textarea placeholder="Type here.." class="form-control" [(ngModel)]="chatMessage"></textarea>
+  <button class="btn btn-primary-outline" (click)="onSend()" [disabled]="!chatMessage">Send</button>
 </div>

@@ -15,6 +15,7 @@ import {IChatMessage} from '../interfaces/chat-message.interface';
 })
 
 export class ChatComponent {
+  chatMessage: string;
   mockMessages: IChatMessage[] = [
     {text: 'Hey!', isOwner: false},
     {text: 'What\'s Up?', isOwner: true},
@@ -44,5 +45,12 @@ export class ChatComponent {
       'owner-message': message.isOwner,
       'non-owner-message': !message.isOwner
     };
+  }
+
+  onSend() {
+    console.log(this.chatMessage);
+    let newMessage: IChatMessage = {text: this.chatMessage, isOwner: true};
+    this.mockMessages.push(newMessage);
+    this.chatMessage = '';
   }
 }
