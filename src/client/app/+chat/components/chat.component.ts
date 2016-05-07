@@ -17,7 +17,7 @@ import {ChatMessageService} from '../services/chat-message.service';
 })
 
 export class ChatComponent implements OnInit, AfterViewInit {
-  chatMessage: string;
+  userMessage: string;
   messages: IChatMessage[];
   
   constructor(private _chatMessageService: ChatMessageService) {}
@@ -38,10 +38,10 @@ export class ChatComponent implements OnInit, AfterViewInit {
   }
 
   onSend() {
-    let newMessage: IChatMessage = {text: this.chatMessage, isOwner: true};
+    let newMessage: IChatMessage = {text: this.userMessage, isOwner: true};
     this._chatMessageService.sendMessage(newMessage);
     this._adjustScrollPosition();
-    this.chatMessage = '';
+    this.userMessage = '';
   }
 
   private _adjustScrollPosition() {
