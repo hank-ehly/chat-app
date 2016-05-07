@@ -1,7 +1,7 @@
 <div id="chat-box">
   <div id="message-container">
     <ul>
-      <li *ngFor="let message of mockMessages" [ngClass]="getMessageStyle(message)">
+      <li *ngFor="let message of messages" [ngClass]="getMessageStyle(message)">
         <div class="chat-bubble">
           {{message.text}}
         </div>
