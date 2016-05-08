@@ -21,10 +21,17 @@ import {MockMessagesService} from '../services/mock-messages.service';
 export class ChatComponent implements OnInit, AfterViewInit {
   userMessage: string;
   messages: IChatMessage[];
+  connections: string[];
 
-  constructor(private _chatMessageService: ChatMessageService) {
+  constructor(private _chatMessageService: ChatMessageService, private _socketIOService: SocketIOService) {
+    this.connections = [];
+
     this._chatMessageService.pushedNewMessage.subscribe(() => {
       this._adjustScrollPosition();
+    });
+
+    this._socketIOService.connectionsUpdate.subscribe((_connections: string[]) => {
+      this.connections = _connections;
     });
   }
 

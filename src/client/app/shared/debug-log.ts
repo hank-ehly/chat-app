@@ -9,6 +9,6 @@ const debug: boolean = true;
 
 export default function debugLog(...x: any[]) {
   if (debug) {
-    console.log(`${new Date()}:`, ...x);
+    console.log(`[${new Date()}]`, ...x);
   }
 }

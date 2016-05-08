@@ -23,15 +23,18 @@ export class ChatMessageService {
     
     this._socketIOService.broadcastMessageUpdate.subscribe((message: IChatMessage) => {
       DEBUG(`Received broadcast message: `, message);
-      this._messages.push(message);
-      this.pushedNewMessage.emit(null);
+      this.pushMessage(message);
     });
     
     this._socketIOService.userMessageUpdate.subscribe((message: IChatMessage) => {
       DEBUG(`Received user message: `, message);
-      this._messages.push(message);
-      this.pushedNewMessage.emit(null);
+      this.pushMessage(message);
     });
+  }
+
+  pushMessage(message: IChatMessage) {
+    this._messages.push(message);
+    this.pushedNewMessage.emit(null);
   }
 
   get messages(): IChatMessage[] {

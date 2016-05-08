@@ -21,15 +21,41 @@ boot(app, __dirname, function(err) {
 
   if (require.main === module) {
     var io = require('socket.io')(app.start());
+
     io.on('connection', function(socket) {
-      console.log('Server connected.');
-      socket.on('message', (message) => onMessage(socket, message));
+      onConnection(socket);
+
+      socket.on('message', function(message) {
+        onMessage(socket, message)
+      });
+
+      socket.on('disconnect', function() {
+        onClose(socket)
+      });
     });
   }
 
 });
 
+var connections = [];
+
+function onConnection(socket) {
+  connections.push(socket.id);
+  socket.emit('user-connection', {connections: connections});
+  socket.broadcast.emit('user-connection', {connections: connections});
+}
+
+function onClose(socket) {
+  connections = connections.filter(function(connection) {
+    return connection !== socket.id;
+  });
+  socket.broadcast.emit('user-connection', {connections: connections});
+}
+
 function onMessage(socket, message) {
   socket.emit('user-message', message);
-  socket.broadcast.emit('message', {text: message.text, isOwner: false});
+  socket.broadcast.emit('message', {
+    text: message.text,
+    isOwner: false
+  });
 }
