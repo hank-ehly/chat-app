@@ -19,6 +19,7 @@ import {MockMessagesService} from '../services/mock-messages.service';
 })
 
 export class ChatComponent implements OnInit, AfterViewInit {
+  user: any;
   userMessage: string;
   messages: IChatMessage[];
   connections: string[];
@@ -65,6 +66,10 @@ export class ChatComponent implements OnInit, AfterViewInit {
   }
 
   private _adjustScrollPosition() {
+    let objDiv = document.getElementById('message-container');
+    if (!objDiv) {
+      return;
+    }
     setTimeout(() => {
       let objDiv = document.getElementById('message-container');
       objDiv.scrollTop = objDiv.scrollHeight;

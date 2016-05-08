@@ -1,21 +1,30 @@
-<div id="chat-box-header">
-  <h6>{{connections.length}} user{{connections.length === 1 ? '' : 's'}} connected</h6>
-</div>
-
-<div id="chat-box">
-  <div id="message-container">
-    <ul>
-      <li *ngFor="let message of messages" [ngClass]="getMessageStyle(message)">
-        <div class="chat-bubble">
-          {{message.text}}
-        </div>
-      </li>
-    </ul>
+<section id="chat-section" *ngIf="user">
+  <div id="chat-box-header">
+    <h6>{{connections.length}} user{{connections.length === 1 ? '' : 's'}} connected</h6>
   </div>
-</div>
 
-<div id="chat-input">
+  <div id="chat-box">
+    <div id="message-container">
+      <ul>
+        <li *ngFor="let message of messages" [ngClass]="getMessageStyle(message)">
+          <div class="chat-bubble">
+            {{message.text}}
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="chat-input">
   <textarea placeholder="Type here.." class="form-control" [(ngModel)]="userMessage"
             (keydown.enter)="onEnter($event)"></textarea>
-  <button class="btn btn-primary-outline" (click)="onSend()" [disabled]="!userMessage">Send</button>
-</div>
+    <button class="btn btn-primary-outline" (click)="onSend()" [disabled]="!userMessage">Send</button>
+  </div>
+</section>
+
+<section id="user-registration-section" *ngIf="!user">
+  <form role="form" (ngSubmit)="onSubmit()" #usernameForm="ngForm">
+    <input type="text" #username="ngForm" ngControl="username" placeholder="Username" required>
+    <input type="submit" value="Submit">
+  </form>
+</section>

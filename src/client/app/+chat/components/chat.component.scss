@@ -73,3 +73,38 @@ div#chat-input {
     outline: none;
   }
 }
+
+section#user-registration-section {
+  width: $chat-box-width;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  input[type="text"] {
+    width: $chat-box-width;
+    display: block;
+    outline: none;
+    font-size: 60px;
+    border: none;
+    border-bottom: 1px solid #eee;
+
+    &.ng-invalid.ng-touched {
+      border-bottom: 1px solid #ff0000;
+    }
+  }
+
+  input[type="submit"] {
+    color: lighten($btn-primary-bg, 5%);
+    display: block;
+    margin: 50px auto 0;
+    cursor: pointer;
+    border: none;
+    background: #fff;
+    outline: none;
+
+    &:hover {
+      color: $btn-primary-bg;
+    }
+  }
+}
