@@ -16,6 +16,6 @@
 
 <div id="chat-input">
   <textarea placeholder="Type here.." class="form-control" [(ngModel)]="userMessage"
-            (keydown.enter)="onSend($event)"></textarea>
+            (keydown.enter)="onEnter($event)"></textarea>
   <button class="btn btn-primary-outline" (click)="onSend()" [disabled]="!userMessage">Send</button>
 </div>
