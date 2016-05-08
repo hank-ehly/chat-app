@@ -19,7 +19,7 @@
     "gulp": "gulp",
     "karma": "karma",
     "karma.start": "karma start",
-    "postinstall": "typings install && gulp check.versions && npm prune",
+    "postinstall": "typings install && gulp check.versions && npm prune && cd src/server && npm install && npm prune",
     "reinstall": "npm cache clean && npm install",
     "serve.api": "cd src/server && node .",
     "serve.coverage": "remap-istanbul -b src/ -i coverage/coverage-final.json -o coverage -t html && npm run gulp -- serve.coverage --color",
