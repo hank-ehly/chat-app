@@ -50,7 +50,12 @@ export class ChatComponent implements OnInit, AfterViewInit {
     };
   }
 
-  onSend() {
+  onSend(e: KeyboardEvent) {
+    e.preventDefault();
+    if (!this.userMessage) {
+      return;
+    }
+    
     let message: IChatMessage = {text: this.userMessage, isOwner: true};
     this._chatMessageService.sendMessage(message);
     this.userMessage = '';
