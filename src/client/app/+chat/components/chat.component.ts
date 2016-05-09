@@ -5,21 +5,21 @@
  * Created by henryehly on 5/6/16.
  */
 
-import {Component, OnInit, AfterViewInit} from '@angular/core';
-import {ChatMessage} from '../interfaces/chat-message.interface';
-import {ChatMessageService} from '../services/chat-message.service';
-import {SocketIOService} from '../services/socket-io.service';
-import {MockMessagesService} from '../services/mock-messages.service';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { ChatMessage } from '../interfaces/chat-message.interface';
+import { ChatMessageService } from '../services/chat-message.service';
+import { SocketIOService } from '../services/socket-io.service';
 
 @Component({
   selector: 'ch-comp',
   templateUrl: 'app/+chat/components/chat.component.html',
   styleUrls: ['app/+chat/components/chat.component.css'],
-  providers: [ChatMessageService, SocketIOService, MockMessagesService]
+  providers: [ChatMessageService, SocketIOService]
 })
 
 export class ChatComponent implements OnInit, AfterViewInit {
-  user: any;
+  user: {name: string};
+  username: string;
   userMessage: string;
   messages: ChatMessage[];
   connections: string[];
@@ -46,8 +46,8 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
   getMessageStyle(message: ChatMessage) {
     return {
-      'owner-message': message.isOwner,
-      'non-owner-message': !message.isOwner
+      'owner-message': message.username === this.user.name,
+      'non-owner-message': message.username !== this.user.name
     };
   }
 
@@ -60,9 +60,13 @@ export class ChatComponent implements OnInit, AfterViewInit {
   }
 
   onSend() {
-    let message = <ChatMessage>{text: this.userMessage, isOwner: true};
+    let message = <ChatMessage>{text: this.userMessage, username: this.user.name};
     this._chatMessageService.sendMessage(message);
     this.userMessage = '';
+  }
+
+  onSubmit() {
+    this.user = {name: this.username};
   }
 
   private _adjustScrollPosition() {

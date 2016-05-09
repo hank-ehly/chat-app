@@ -7,8 +7,9 @@
     <div id="message-container">
       <ul>
         <li *ngFor="let message of messages" [ngClass]="getMessageStyle(message)">
+          <span class="message-user" *ngIf="message.username !== user.name">{{ message.username }}:</span>
           <div class="chat-bubble">
-            {{message.text}}
+            <span class="message-text">{{ message.text }}</span>
           </div>
         </li>
       </ul>
@@ -23,8 +24,8 @@
 </section>
 
 <section id="user-registration-section" *ngIf="!user">
-  <form role="form" (ngSubmit)="onSubmit()" #usernameForm="ngForm">
-    <input type="text" #username="ngForm" ngControl="username" placeholder="Username" required>
+  <form role="form" (ngSubmit)="onSubmit(registrationForm)">
+    <input type="text" [(ngModel)]="username" ngControl="username" placeholder="Username" required>
     <input type="submit" value="Submit">
   </form>
 </section>

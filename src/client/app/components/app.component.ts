@@ -5,8 +5,8 @@
  * Created by henryehly on 5/6/16.
  */
 
-import {Component} from '@angular/core';
-import {ChatComponent} from '../+chat/index';
+import { Component } from '@angular/core';
+import { ChatComponent } from '../+chat/index';
 
 @Component({
   selector: 'ch-app',

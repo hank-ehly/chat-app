@@ -53,9 +53,6 @@ function onClose(socket) {
 }
 
 function onMessage(socket, message) {
-  socket.emit('user-message', message);
-  socket.broadcast.emit('message', {
-    text: message.text,
-    isOwner: false
-  });
+  socket.emit('message', message);
+  socket.broadcast.emit('message', message);
 }

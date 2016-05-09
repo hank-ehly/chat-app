@@ -7,5 +7,5 @@
 
 export interface ChatMessage {
   text: string;
-  isOwner: boolean;
+  username: string;
 }

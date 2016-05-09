@@ -50,6 +50,17 @@ li.owner-message {
   }
 }
 
+span.message-text {
+
+}
+
+span.message-user {
+  display: block;
+  padding-left: 12px;
+  font-weight: 300;
+  font-size: 12px;
+}
+
 div#chat-input {
   height: 100px;
   width: $chat-box-width;
@@ -88,7 +99,7 @@ section#user-registration-section {
     font-size: 60px;
     border: none;
     border-bottom: 1px solid #eee;
-    border-left: 10px solid #d3d3d3;
+    border-left: 10px solid #ccc;
     padding-left: 25px;
 
     &.ng-invalid.ng-touched,
