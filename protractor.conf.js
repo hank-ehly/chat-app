@@ -1,5 +1,5 @@
 exports.config = {
-  baseUrl: 'http://localhost:5555',
+  baseUrl: 'http://localhost:5556',
 
   specs: [
     'dist/dev/**/*.e2e.js'

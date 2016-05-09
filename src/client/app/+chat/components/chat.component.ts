@@ -76,4 +76,3 @@ export class ChatComponent implements OnInit, AfterViewInit {
     }, 0);
   }
 }
-

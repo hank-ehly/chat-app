@@ -1,6 +1,6 @@
-import {argv} from 'yargs';
-import {join} from 'path';
-import {InjectableDependency, Environments} from './seed.config.interfaces';
+import { argv } from 'yargs';
+import { join } from 'path';
+import { InjectableDependency, Environments } from './seed.config.interfaces';
 
 export const ENVIRONMENTS: Environments = {
   DEVELOPMENT: 'dev',
@@ -51,15 +51,11 @@ export class SeedConfig {
 
   NPM_DEPENDENCIES: InjectableDependency[] = [
     { src: 'systemjs/dist/system-polyfills.src.js', inject: 'shims', env: ENVIRONMENTS.DEVELOPMENT },
+    { src: 'zone.js/dist/zone.js', inject: 'libs' },
     { src: 'reflect-metadata/Reflect.js', inject: 'shims' },
     { src: 'es6-shim/es6-shim.js', inject: 'shims' },
     { src: 'systemjs/dist/system.src.js', inject: 'shims', env: ENVIRONMENTS.DEVELOPMENT },
-    { src: 'angular2/bundles/angular2-polyfills.js', inject: 'shims' },
-    { src: 'rxjs/bundles/Rx.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT },
-    { src: 'angular2/bundles/angular2.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT },
-    { src: 'angular2/bundles/router.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT },
-    { src: 'angular2/bundles/http.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT },
-    { src: 'zone.js/dist/zone.js', inject: 'libs' }
+    { src: 'rxjs/bundles/Rx.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT }
   ];
 
   // Declare local files that needs to be injected
@@ -81,7 +77,7 @@ export class SeedConfig {
 
   // ----------------
   // SystemsJS Configuration.
-  protected SYSTEM_CONFIG_DEV = {
+  protected SYSTEM_CONFIG_DEV: any = {
     defaultJSExtensions: true,
     packageConfigPaths: [
       `${this.APP_BASE}node_modules/*/package.json`,
@@ -101,7 +97,7 @@ export class SeedConfig {
 
   SYSTEM_CONFIG = this.SYSTEM_CONFIG_DEV;
 
-  SYSTEM_BUILDER_CONFIG = {
+  SYSTEM_BUILDER_CONFIG: any = {
     defaultJSExtensions: true,
     packageConfigPaths: [
       join(this.PROJECT_ROOT, 'node_modules', '*', 'package.json'),
@@ -110,6 +106,43 @@ export class SeedConfig {
     paths: {
       [`${this.TMP_DIR}/*`]: `${this.TMP_DIR}/*`,
       '*': 'node_modules/*'
+    },
+    packages: {
+      '@angular/core': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      '@angular/compiler': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      '@angular/common': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      '@angular/http': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      '@angular/platform-browser': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      '@angular/platform-browser-dynamic': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      '@angular/router-deprecated': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      '@angular/router': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      'rxjs': {
+        defaultExtension: 'js'
+      }
     }
   };
 
