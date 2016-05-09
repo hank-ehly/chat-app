@@ -88,9 +88,16 @@ section#user-registration-section {
     font-size: 60px;
     border: none;
     border-bottom: 1px solid #eee;
+    border-left: 10px solid #d3d3d3;
+    padding-left: 25px;
 
-    &.ng-invalid.ng-touched {
-      border-bottom: 1px solid #ff0000;
+    &.ng-invalid.ng-touched,
+    &.ng-invalid.ng-dirty {
+      border-left: 10px solid #f00;
+    }
+
+    &.ng-valid {
+      border-left: 10px solid #0f0;
     }
   }
 
