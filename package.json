@@ -72,6 +72,8 @@
     "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.5",
+    "gulp-concat-css": "^2.2.0",
+    "gulp-clean-css": "^2.0.7",
     "is-ci": "^1.0.8",
     "isstream": "^0.1.2",
     "jasmine-core": "~2.4.1",
@@ -113,17 +115,23 @@
     "yargs": "^4.2.0"
   },
   "dependencies": {
-    "angular2": "2.0.0-beta.17",
     "bootstrap": "^4.0.0-alpha.2",
+    "jquery": "^2.2.3",
+    "socket.io": "^1.4.6",
+    "tether": "^1.3.2",
+    "@angular/common": "2.0.0-rc.1",
+    "@angular/compiler": "2.0.0-rc.1",
+    "@angular/core": "2.0.0-rc.1",
+    "@angular/platform-browser": "2.0.0-rc.1",
+    "@angular/platform-browser-dynamic": "2.0.0-rc.1",
+    "@angular/router": "2.0.0-rc.1",
+    "@angular/router-deprecated": "2.0.0-rc.1",
     "es6-module-loader": "^0.17.8",
     "es6-promise": "^3.1.2",
     "es6-shim": "0.35.0",
-    "jquery": "^2.2.3",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.6",
-    "socket.io": "^1.4.6",
-    "systemjs": "~0.19.25",
-    "tether": "^1.3.2",
+    "systemjs": "0.19.26",
     "zone.js": "^0.6.12"
   }
 }

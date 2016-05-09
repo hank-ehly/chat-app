@@ -1,6 +1,6 @@
-import {provide, enableProdMode} from 'angular2/core';
-import {bootstrap} from 'angular2/platform/browser';
-import {APP_BASE_HREF} from 'angular2/platform/common';
+import {provide, enableProdMode} from '@angular/core';
+import {bootstrap} from '@angular/platform-browser-dynamic';
+import {APP_BASE_HREF} from '@angular/common';
 import {AppComponent} from './app/components/app.component';
 
 if ('<%= ENV %>' === 'prod') { enableProdMode(); }

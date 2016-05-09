@@ -6,7 +6,7 @@
  */
 
 import {IChatMessage} from '../interfaces/chat-message.interface';
-import {Injectable} from 'angular2/core';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 

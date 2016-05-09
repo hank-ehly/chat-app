@@ -5,7 +5,7 @@
  * Created by henryehly on 5/6/16.
  */
 
-import {Component, OnInit, AfterViewInit} from 'angular2/core';
+import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {IChatMessage} from '../interfaces/chat-message.interface';
 import {ChatMessageService} from '../services/chat-message.service';
 import {SocketIOService} from '../services/socket-io.service';

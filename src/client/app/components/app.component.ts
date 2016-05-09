@@ -5,7 +5,7 @@
  * Created by henryehly on 5/6/16.
  */
 
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 import {ChatComponent} from '../+chat/index';
 
 @Component({

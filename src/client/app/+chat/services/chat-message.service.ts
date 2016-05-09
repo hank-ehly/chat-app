@@ -5,7 +5,7 @@
  * Created by henryehly on 5/7/16.
  */
 
-import {Injectable, EventEmitter} from 'angular2/core';
+import {Injectable, EventEmitter} from '@angular/core';
 import {IChatMessage} from '../interfaces/chat-message.interface';
 import {SocketIOService} from './socket-io.service';
 import DEBUG from '../../shared/debug-log';
