@@ -5,7 +5,7 @@
  * Created by henryehly on 5/6/16.
  */
 
-export interface IChatMessage {
+export interface ChatMessage {
   text: string;
   isOwner: boolean;
 }

@@ -6,7 +6,7 @@
  */
 
 import {Component, OnInit, AfterViewInit} from '@angular/core';
-import {IChatMessage} from '../interfaces/chat-message.interface';
+import {ChatMessage} from '../interfaces/chat-message.interface';
 import {ChatMessageService} from '../services/chat-message.service';
 import {SocketIOService} from '../services/socket-io.service';
 import {MockMessagesService} from '../services/mock-messages.service';
@@ -21,7 +21,7 @@ import {MockMessagesService} from '../services/mock-messages.service';
 export class ChatComponent implements OnInit, AfterViewInit {
   user: any;
   userMessage: string;
-  messages: IChatMessage[];
+  messages: ChatMessage[];
   connections: string[];
 
   constructor(private _chatMessageService: ChatMessageService, private _socketIOService: SocketIOService) {
@@ -44,7 +44,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
     this._adjustScrollPosition();
   }
 
-  getMessageStyle(message: IChatMessage) {
+  getMessageStyle(message: ChatMessage) {
     return {
       'owner-message': message.isOwner,
       'non-owner-message': !message.isOwner
@@ -60,7 +60,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
   }
 
   onSend() {
-    let message = <IChatMessage>{text: this.userMessage, isOwner: true};
+    let message = <ChatMessage>{text: this.userMessage, isOwner: true};
     this._chatMessageService.sendMessage(message);
     this.userMessage = '';
   }

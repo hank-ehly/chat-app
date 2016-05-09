@@ -5,13 +5,13 @@
  * Created by henryehly on 5/7/16.
  */
 
-import {IChatMessage} from '../interfaces/chat-message.interface';
+import {ChatMessage} from '../interfaces/chat-message.interface';
 import {Injectable} from '@angular/core';
 
 @Injectable()
 
 export class MockMessagesService {
-  private _messages: IChatMessage[] = [
+  private _messages: ChatMessage[] = [
     {text: 'Hey!', isOwner: false},
     {text: 'What\'s Up?', isOwner: true},
     {text: 'Nothin what r u doin?', isOwner: false},
@@ -35,7 +35,7 @@ export class MockMessagesService {
     {text: 'later', isOwner: false}
   ];
 
-  get messages(): IChatMessage[] {
+  get messages(): ChatMessage[] {
     return this._messages;
   }
 }

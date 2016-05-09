@@ -6,7 +6,7 @@
  */
 
 import {Injectable, EventEmitter} from '@angular/core';
-import {IChatMessage} from '../interfaces/chat-message.interface';
+import {ChatMessage} from '../interfaces/chat-message.interface';
 import {SocketIOService} from './socket-io.service';
 import DEBUG from '../../shared/debug-log';
 import {MockMessagesService} from './mock-messages.service';
@@ -15,33 +15,33 @@ import {MockMessagesService} from './mock-messages.service';
 
 export class ChatMessageService {
   pushedNewMessage: EventEmitter<any>;
-  private _messages: IChatMessage[];
+  private _messages: ChatMessage[];
 
   constructor(private _socketIOService: SocketIOService, private _mockMessagesService: MockMessagesService) {
     this._messages = [];
     this.pushedNewMessage = new EventEmitter();
     
-    this._socketIOService.broadcastMessageUpdate.subscribe((message: IChatMessage) => {
+    this._socketIOService.broadcastMessageUpdate.subscribe((message: ChatMessage) => {
       DEBUG(`Received broadcast message: `, message);
       this.pushMessage(message);
     });
     
-    this._socketIOService.userMessageUpdate.subscribe((message: IChatMessage) => {
+    this._socketIOService.userMessageUpdate.subscribe((message: ChatMessage) => {
       DEBUG(`Received user message: `, message);
       this.pushMessage(message);
     });
   }
 
-  pushMessage(message: IChatMessage) {
+  pushMessage(message: ChatMessage) {
     this._messages.push(message);
     this.pushedNewMessage.emit(null);
   }
 
-  get messages(): IChatMessage[] {
+  get messages(): ChatMessage[] {
     return this._messages;
   }
 
-  sendMessage(message: IChatMessage) {
+  sendMessage(message: ChatMessage) {
     this._socketIOService.broadcastMessage(message);
   }
 
