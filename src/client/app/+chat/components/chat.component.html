@@ -26,12 +26,9 @@
   </main>
 
   <aside id="connected-users">
-    <h6>{{ connections.length }} connected user{{ connections.length === 1 ? '' : 's' }}</h6>
+    <h6>{{ connectedUsers.length }} connected user{{ connectedUsers.length === 1 ? '' : 's' }}</h6>
     <ul>
-      <li>Bob</li>
-      <li>Hank</li>
-      <li>Bill</li>
-      <li>Henry Christopher Ehly</li>
+      <li *ngFor="let u of connectedUsers">{{ u.name }}</li>
     </ul>
   </aside>
 

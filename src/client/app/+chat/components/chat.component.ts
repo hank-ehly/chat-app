@@ -23,14 +23,14 @@ export class ChatComponent implements OnInit, AfterViewInit {
   user: User;
   username: string;
   userMessage: string;
+  connectedUsers: User[];
   messages: ChatMessage[];
-  connections: string[];
 
   constructor(private chatMessageService: ChatMessageService, private socketIOService: SocketIOService) {
-    this.connections = [];
-    // this.user = {name: 'foobar'}; // debug
+    this.connectedUsers = [];
     this.chatMessageService.pushedNewMessage.subscribe(() => this.adjustScrollPosition());
-    this.socketIOService.connectionsUpdate.subscribe((connections: string[]) => this.connections = connections);
+    this.socketIOService.connectionsUpdate.subscribe(() => this.socketIOService.addUserToChat(this.user));
+    this.socketIOService.addChatUser.subscribe((user: User) => this.connectedUsers.push(user));
   }
 
   ngOnInit() {
@@ -59,13 +59,13 @@ export class ChatComponent implements OnInit, AfterViewInit {
   }
 
   send() {
-    let message = <ChatMessage>{text: this.userMessage, username: this.user.name};
+    let message: ChatMessage = {text: this.userMessage, username: this.user.name};
     this.chatMessageService.sendMessage(message);
     this.userMessage = '';
   }
 
   submit() {
-    this.user = <User>{name: this.username};
+    this.user = {name: this.username};
     this.socketIOService.connect();
   }
 

@@ -1,13 +1,15 @@
-import {provide, enableProdMode} from '@angular/core';
-import {bootstrap} from '@angular/platform-browser-dynamic';
-import {APP_BASE_HREF} from '@angular/common';
+import { provide, enableProdMode } from '@angular/core';
+import { bootstrap } from '@angular/platform-browser-dynamic';
+import { APP_BASE_HREF } from '@angular/common';
 
-import {AppComponent} from './app/components/app.component';
+import { AppComponent } from './app/components/app.component';
 
-if ('<%= ENV %>' === 'prod') { enableProdMode(); }
+if ('<%= ENV %>' === 'prod') {
+  enableProdMode();
+}
 
 bootstrap(AppComponent, [
-  provide(APP_BASE_HREF, { useValue: '<%= APP_BASE %>' })
+  provide(APP_BASE_HREF, {useValue: '<%= APP_BASE %>'})
 ]);
 
 // In order to start the Service Worker located at "./worker.js"

@@ -25,6 +25,10 @@ boot(app, __dirname, function(err) {
     io.on('connection', function(socket) {
       onConnection(socket);
 
+      socket.on('add-chat-user', function(user) {
+        addChatUserForSocket(user, socket);
+      });
+
       socket.on('message', function(message) {
         onMessage(socket, message)
       });
@@ -37,19 +41,24 @@ boot(app, __dirname, function(err) {
 
 });
 
-var connections = [];
+var User = function(name, id) {
+  this.name = name;
+  this.id = id;
+};
 
 function onConnection(socket) {
-  connections.push(socket.id);
-  socket.emit('user-connection', {connections: connections});
-  socket.broadcast.emit('user-connection', {connections: connections});
+  socket.emit('connections-update');
+  socket.broadcast.emit('connections-update');
+}
+
+function addChatUserForSocket(user, socket) {
+  var newUser = new User(user.name, socket.id);
+  socket.emit('add-chat-user', newUser);
+  socket.broadcast.emit('add-chat-user', newUser);
 }
 
 function onClose(socket) {
-  connections = connections.filter(function(connection) {
-    return connection !== socket.id;
-  });
-  socket.broadcast.emit('user-connection', {connections: connections});
+  socket.broadcast.emit('connections-update');
 }
 
 function onMessage(socket, message) {
