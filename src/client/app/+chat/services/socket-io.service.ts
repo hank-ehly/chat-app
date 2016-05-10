@@ -5,32 +5,32 @@
  * Created by henryehly on 5/7/16.
  */
 
-import { Injectable, EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import Socket = SocketIOClient.Socket;
+
 import { ChatMessage } from '../interfaces/chat-message.interface';
 
 @Injectable()
 
 export class SocketIOService {
-  messageUpdate: EventEmitter<ChatMessage>;
   connectionsUpdate: EventEmitter<any[]>;
-  private _socket: Socket;
-  private _socketUrl: string = 'http://localhost:3000';
+  messageUpdate: EventEmitter<ChatMessage>;
+  private socket: Socket;
+  private socketUrl: string = 'http://localhost:3000';
 
   constructor() {
     this.messageUpdate = new EventEmitter<ChatMessage>();
     this.connectionsUpdate = new EventEmitter<any>();
-
-    this.openSocket();
+    this.connect();
   }
 
-  openSocket() {
-    this._socket = io(this._socketUrl);
-    this._socket.on('message', (message: ChatMessage) => this.messageUpdate.emit(message));
-    this._socket.on('user-connection', (data: any) => this.connectionsUpdate.emit(data.connections));
+  connect() {
+    this.socket = io(this.socketUrl);
+    this.socket.on('message', (message: ChatMessage) => this.messageUpdate.emit(message));
+    this.socket.on('user-connection', (data: any) => this.connectionsUpdate.emit(data.connections));
   }
 
   broadcastMessage(message: ChatMessage) {
-    this._socket.emit('message', message);
+    this.socket.emit('message', message);
   }
 }

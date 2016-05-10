@@ -5,34 +5,31 @@
  * Created by henryehly on 5/7/16.
  */
 
-import { Injectable, EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
+
 import { ChatMessage } from '../interfaces/chat-message.interface';
-import { SocketIOService } from './socket-io.service';
 import DEBUG from '../../shared/debug-log';
+import { SocketIOService } from './socket-io.service';
 
 @Injectable()
 
 export class ChatMessageService {
   pushedNewMessage: EventEmitter<any>;
-  private _messages: ChatMessage[];
+  messages: ChatMessage[];
 
-  constructor(private _socketIOService: SocketIOService) {
-    this._messages = [];
+  constructor(private socketIOService: SocketIOService) {
+    this.messages = [];
     this.pushedNewMessage = new EventEmitter();
 
-    this._socketIOService.messageUpdate.subscribe((message: ChatMessage) => {
-      DEBUG(`Received message: `, message);
-      this._messages.push(message);
+    this.socketIOService.messageUpdate.subscribe((message: ChatMessage) => {
+      DEBUG('Received message: ', message);
+      this.messages.push(message);
       this.pushedNewMessage.emit(null);
     });
   }
 
-  get messages(): ChatMessage[] {
-    return this._messages;
-  }
-
   sendMessage(message: ChatMessage) {
-    this._socketIOService.broadcastMessage(message);
+    this.socketIOService.broadcastMessage(message);
   }
 
 }

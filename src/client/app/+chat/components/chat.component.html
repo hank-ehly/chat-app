@@ -17,14 +17,14 @@
   </div>
 
   <div id="chat-input">
-  <textarea placeholder="Type here.." class="form-control" [(ngModel)]="userMessage"
-            (keydown.enter)="onEnter($event)"></textarea>
-    <button class="btn btn-primary-outline" (click)="onSend()" [disabled]="!userMessage">Send</button>
+    <textarea placeholder="Type here.." class="form-control" [(ngModel)]="userMessage"
+              (keydown.enter)="enter($event)"></textarea>
+    <button class="btn btn-primary-outline" (click)="send()" [disabled]="!userMessage">Send</button>
   </div>
 </section>
 
 <section id="user-registration-section" *ngIf="!user">
-  <form role="form" (ngSubmit)="onSubmit(registrationForm)">
+  <form role="form" (ngSubmit)="submit(registrationForm)">
     <input type="text" [(ngModel)]="username" ngControl="username" placeholder="Username" required>
     <input type="submit" value="Submit">
   </form>

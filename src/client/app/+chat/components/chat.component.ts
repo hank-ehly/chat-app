@@ -5,10 +5,12 @@
  * Created by henryehly on 5/6/16.
  */
 
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { SocketIOService } from '../services/socket-io.service';
+
 import { ChatMessage } from '../interfaces/chat-message.interface';
 import { ChatMessageService } from '../services/chat-message.service';
-import { SocketIOService } from '../services/socket-io.service';
+import { User } from '../interfaces/user.interface';
 
 @Component({
   selector: 'ch-comp',
@@ -18,30 +20,30 @@ import { SocketIOService } from '../services/socket-io.service';
 })
 
 export class ChatComponent implements OnInit, AfterViewInit {
-  user: {name: string};
+  user: User;
   username: string;
   userMessage: string;
   messages: ChatMessage[];
   connections: string[];
 
-  constructor(private _chatMessageService: ChatMessageService, private _socketIOService: SocketIOService) {
+  constructor(private chatMessageService: ChatMessageService, private socketIOService: SocketIOService) {
     this.connections = [];
 
-    this._chatMessageService.pushedNewMessage.subscribe(() => {
-      this._adjustScrollPosition();
+    this.chatMessageService.pushedNewMessage.subscribe(() => {
+      this.adjustScrollPosition();
     });
 
-    this._socketIOService.connectionsUpdate.subscribe((_connections: string[]) => {
-      this.connections = _connections;
+    this.socketIOService.connectionsUpdate.subscribe((connections: string[]) => {
+      this.connections = connections;
     });
   }
 
   ngOnInit() {
-    this.messages = this._chatMessageService.messages;
+    this.messages = this.chatMessageService.messages;
   }
 
   ngAfterViewInit() {
-    this._adjustScrollPosition();
+    this.adjustScrollPosition();
   }
 
   getMessageStyle(message: ChatMessage) {
@@ -51,32 +53,28 @@ export class ChatComponent implements OnInit, AfterViewInit {
     };
   }
 
-  onEnter(e: KeyboardEvent) {
+  enter(e: KeyboardEvent) {
     e.preventDefault();
     if (!this.userMessage) {
       return;
     }
-    this.onSend();
+    this.send();
   }
 
-  onSend() {
+  send() {
     let message = <ChatMessage>{text: this.userMessage, username: this.user.name};
-    this._chatMessageService.sendMessage(message);
+    this.chatMessageService.sendMessage(message);
     this.userMessage = '';
   }
 
-  onSubmit() {
-    this.user = {name: this.username};
+  submit() {
+    this.user = <User>{name: this.username};
   }
 
-  private _adjustScrollPosition() {
-    let objDiv = document.getElementById('message-container');
-    if (!objDiv) {
-      return;
+  private adjustScrollPosition() {
+    let messageContainer = document.getElementById('message-container');
+    if (messageContainer) {
+      messageContainer.scrollTop = messageContainer.scrollHeight;
     }
-    setTimeout(() => {
-      let objDiv = document.getElementById('message-container');
-      objDiv.scrollTop = objDiv.scrollHeight;
-    }, 0);
   }
 }

@@ -9,3 +9,4 @@ export * from './components/chat.component';
 export * from './interfaces/chat-message.interface';
 export * from './services/chat-message.service';
 export * from './services/socket-io.service';
+export * from './interfaces/user.interface';
