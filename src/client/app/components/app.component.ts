@@ -6,6 +6,7 @@
  */
 
 import { Component } from '@angular/core';
+
 import { ChatComponent } from '../+chat/index';
 
 @Component({
