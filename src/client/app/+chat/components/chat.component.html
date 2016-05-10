@@ -1,26 +1,40 @@
 <section id="chat-section" *ngIf="user">
-  <div id="chat-box-header">
-    <h6>{{connections.length}} user{{connections.length === 1 ? '' : 's'}} connected</h6>
-  </div>
 
-  <div id="chat-box">
-    <div id="message-container">
-      <ul>
-        <li *ngFor="let message of messages" [ngClass]="getMessageStyle(message)">
-          <span class="message-user" *ngIf="message.username !== user.name">{{ message.username }}:</span>
-          <div class="chat-bubble">
-            <span class="message-text">{{ message.text }}</span>
-          </div>
-        </li>
-      </ul>
+  <main>
+    <div id="chat-box-header">
+      <h6>You are "{{ user.name }}"</h6>
     </div>
-  </div>
 
-  <div id="chat-input">
+    <div id="chat-box">
+      <div id="message-container">
+        <ul>
+          <li *ngFor="let message of messages" [ngClass]="getMessageStyle(message)">
+            <span class="message-user" *ngIf="message.username !== user.name">{{ message.username }}:</span>
+            <div class="chat-bubble">
+              <span class="message-text">{{ message.text }}</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="chat-input">
     <textarea placeholder="Type here.." class="form-control" [(ngModel)]="userMessage"
               (keydown.enter)="enter($event)"></textarea>
-    <button class="btn btn-primary-outline" (click)="send()" [disabled]="!userMessage">Send</button>
-  </div>
+      <button class="btn btn-primary-outline" (click)="send()" [disabled]="!userMessage">Send</button>
+    </div>
+  </main>
+
+  <aside id="connected-users">
+    <h6>{{ connections.length }} connected user{{ connections.length === 1 ? '' : 's' }}</h6>
+    <ul>
+      <li>Bob</li>
+      <li>Hank</li>
+      <li>Bill</li>
+      <li>Henry Christopher Ehly</li>
+    </ul>
+  </aside>
+
 </section>
 
 <section id="user-registration-section" *ngIf="!user">

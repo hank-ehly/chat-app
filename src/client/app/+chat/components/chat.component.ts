@@ -28,14 +28,9 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
   constructor(private chatMessageService: ChatMessageService, private socketIOService: SocketIOService) {
     this.connections = [];
-
-    this.chatMessageService.pushedNewMessage.subscribe(() => {
-      this.adjustScrollPosition();
-    });
-
-    this.socketIOService.connectionsUpdate.subscribe((connections: string[]) => {
-      this.connections = connections;
-    });
+    // this.user = {name: 'foobar'}; // debug
+    this.chatMessageService.pushedNewMessage.subscribe(() => this.adjustScrollPosition());
+    this.socketIOService.connectionsUpdate.subscribe((connections: string[]) => this.connections = connections);
   }
 
   ngOnInit() {
@@ -47,9 +42,11 @@ export class ChatComponent implements OnInit, AfterViewInit {
   }
 
   getMessageStyle(message: ChatMessage) {
+    let isUserMessage = message.username === this.user.name;
+
     return {
-      'owner-message': message.username === this.user.name,
-      'non-owner-message': message.username !== this.user.name
+      'owner-message': isUserMessage,
+      'non-owner-message': !isUserMessage
     };
   }
 
@@ -69,6 +66,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
   submit() {
     this.user = <User>{name: this.username};
+    this.socketIOService.connect();
   }
 
   private adjustScrollPosition() {

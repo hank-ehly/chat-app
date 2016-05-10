@@ -21,7 +21,6 @@ export class SocketIOService {
   constructor() {
     this.messageUpdate = new EventEmitter<ChatMessage>();
     this.connectionsUpdate = new EventEmitter<any>();
-    this.connect();
   }
 
   connect() {
