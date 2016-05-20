@@ -6,7 +6,7 @@
  */
 
 import { EventEmitter, Injectable } from '@angular/core';
-import Socket = SocketIOClient.Socket;
+import * as io from 'socket.io-client';
 
 import { ChatMessage } from '../interfaces/chat-message.interface';
 import { User } from '../interfaces/user.interface';
@@ -14,10 +14,11 @@ import { User } from '../interfaces/user.interface';
 @Injectable()
 
 export class SocketIOService {
+  io: SocketIOClientStatic;
   connectionsUpdate: EventEmitter<any[]>;
   messageUpdate: EventEmitter<ChatMessage>;
   addChatUser: EventEmitter<User>;
-  private socket: Socket;
+  private socket: SocketIOClient.Socket;
   private socketUrl: string = 'http://localhost:3000';
 
   constructor() {

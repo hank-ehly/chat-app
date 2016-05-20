@@ -12,8 +12,6 @@ export class ProjectConfig extends SeedConfig {
 
     let additional_deps: InjectableDependency[] = [
       {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
-      {src: 'socket.io/lib/index.js', inject: 'libs'},
-      {src: 'socket.io-client/socket.io.js', inject: 'libs'},
       {src: 'tether/dist/js/tether.min.js', inject: 'libs'},
       {src: 'bootstrap/dist/js/bootstrap.min.js', inject: 'libs'},
       {src: 'bootstrap/dist/css/bootstrap.min.css', inject: true}
@@ -28,5 +26,7 @@ export class ProjectConfig extends SeedConfig {
     const seedDependencies = this.NPM_DEPENDENCIES;
 
     this.NPM_DEPENDENCIES = seedDependencies.concat(additional_deps);
+    
+    this.SYSTEM_BUILDER_CONFIG.paths['socket.io-client'] = 'node_modules/socket.io/node_modules/socket.io-client/socket.io.js';
   }
 }
