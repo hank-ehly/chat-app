@@ -1,4 +1,3 @@
-debugger;
 if (!Object.hasOwnProperty('name')) {
   Object.defineProperty(Function.prototype, 'name', {
     get: function() {
@@ -55,10 +54,6 @@ System.config({
       main: 'index.js',
       defaultExtension: 'js'
     },
-    '@angular/router-deprecated': {
-      main: 'index.js',
-      defaultExtension: 'js'
-    },
     '@angular/router': {
       main: 'index.js',
       defaultExtension: 'js'
@@ -73,7 +68,6 @@ Promise.all([
   System.import('@angular/core/testing'),
   System.import('@angular/platform-browser-dynamic/testing')
 ]).then(function (providers) {
-  debugger;
   var testing = providers[0];
   var testingBrowser = providers[1];
 
@@ -81,26 +75,26 @@ Promise.all([
     testingBrowser.TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS);
 
 }).then(function() {
-    return Promise.all(
-      Object.keys(window.__karma__.files) // All files served by Karma.
-        .filter(onlySpecFiles)
-        .map(file2moduleName)
-        .map(function(path) {
-          return System.import(path).then(function(module) {
-            if (module.hasOwnProperty('main')) {
-              module.main();
-            } else {
-              throw new Error('Module ' + path + ' does not implement main() method.');
-            }
-          });
-        }));
-  })
-  .then(function() {
-    __karma__.start();
-  }, function(error) {
-    console.error(error.stack || error);
-    __karma__.start();
-  });
+  return Promise.all(
+    Object.keys(window.__karma__.files) // All files served by Karma.
+    .filter(onlySpecFiles)
+    .map(file2moduleName)
+    .map(function(path) {
+      return System.import(path).then(function(module) {
+        if (module.hasOwnProperty('main')) {
+          module.main();
+        } else {
+          throw new Error('Module ' + path + ' does not implement main() method.');
+        }
+      });
+    }));
+})
+.then(function() {
+  __karma__.start();
+}, function(error) {
+  console.error(error.stack || error);
+  __karma__.start();
+});
 
 function onlySpecFiles(path) {
   // check for individual files, if not given, always matches to all
