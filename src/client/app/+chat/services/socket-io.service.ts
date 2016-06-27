@@ -6,15 +6,14 @@
  */
 
 import { EventEmitter, Injectable } from '@angular/core';
-import * as io from 'socket.io-client';
 
 import { ChatMessage } from '../interfaces/chat-message.interface';
 import { User } from '../interfaces/user.interface';
 
-@Injectable()
+const io = require('socket.io-client');
 
+@Injectable()
 export class SocketIOService {
-  io: SocketIOClientStatic;
   connectionsUpdate: EventEmitter<any[]>;
   messageUpdate: EventEmitter<ChatMessage>;
   addChatUser: EventEmitter<User>;

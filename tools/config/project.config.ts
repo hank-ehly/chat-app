@@ -21,6 +21,8 @@ export class ProjectConfig extends SeedConfig {
       {src: 'bootstrap/dist/css/bootstrap.min.css', inject: true}
     ];
 
+    (<any>this.SYSTEM_CONFIG_DEV.paths)['socket.io-client'] = `${this.APP_BASE}node_modules/socket.io-client/socket.io.js`;
+
     const seedDependencies = this.NPM_DEPENDENCIES;
 
     this.NPM_DEPENDENCIES = seedDependencies.concat(additional_deps);
